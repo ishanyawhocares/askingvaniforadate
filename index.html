@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="styles.css" />
+    <title>Three Page Date Proposal</title>
+    <style>
+      body {
+        background-color: #800080;
+        font-size: 1.5rem;
+        color: #fff;
+      }
+
+      .page {
+        text-align: center;
+        padding: 2rem;
+      }
+
+      .btn {
+        margin-top: 2rem;
+        padding: 1rem 2rem;
+        font-size: 1.5rem;
+        background-color: #f8fafc;
+        border-radius: 8px;
+        border: none;
+        cursor: pointer;
+        transition: background-color 0.3s ease, transform 0.2s ease;
+      }
+
+      .btn:hover {
+        background-color: #e2e8f0;
+        transform: scale(1.1);
+      }
+
+      .container {
+        position: relative;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+      }
+
+      .image-1 {
+        margin: 2rem 0;
+      }
+
+      .btn-group {
+        display: flex;
+        gap: 1rem;
+      }
+
+      .fireworks {
+        background: url('assets/fireworks.gif') no-repeat center center;
+        background-size: cover;
+        height: 100vh;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        color: #fff;
+        font-size: 2rem;
+        text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7);
+      }
+
+      #page4 img {
+        display: none; /* Initially hidden */
+        margin: 0 auto 2rem;
+      }
+
+      #page4 h1 {
+        text-align: center;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="page1" class="page">
+      <h1>In this one month, my heart found its glow,</h1>
+      <p>
+        Thank you, Vani, for letting our love grow.<br />
+        Through fights and storms, I see the light,<br />
+        I am sorry for the wrongs, Ill make them right.<br />
+        Forever, my love for you will brightly show.
+      </p>
+      <button class="btn" onclick="goToPage(2)">Next</button>
+    </div>
+
+    <div id="page2" class="page hide">
+      <h1>You are the sunshine that brightens my day,</h1>
+      <p>
+        The warmth in my heart, come what may.<br />
+        Forever and ever, I want us to be,<br />
+        A love so endless, just you and me.<br />
+        Please stay with me, my eternity.<br />
+        <h2>Will you?</h2>
+      </p>
+      <button class="btn" onclick="goToPage(3)">Next</button>
+    </div>
+
+    <div id="page3" class="page hide">
+      <h1>Vani, will you go on a date with me?</h1>
+      <img src="assets/erm-fingers.gif" alt="please" class="image-1" />
+      <div class="container" id="container">
+        <div class="btn-group">
+          <button class="btn btn-yes" onclick="goToPage(4)">Yes</button>
+          <button class="btn btn-no">No</button>
+        </div>
+      </div>
+    </div>
+
+    <div id="page4" class="page hide fireworks">
+      <img src="assets/oh-yay.gif" alt="yes" />
+      <h1>I knew ittt, I loveeeeeeee youuuuuuu Vaniiiiiiiiiiiiii, I love you betuuuuuuuuu !</h1>
+    </div>
+
+    <script>
+      function goToPage(pageNumber) {
+        document.querySelectorAll('.page').forEach((page, index) => {
+          page.classList.toggle('hide', index !== pageNumber - 1);
+        });
+
+        // Show "oh-yay.gif" only on the last page
+        const ohYayGif = document.querySelector('#page4 img[alt="yes"]');
+        if (pageNumber === 4) {
+          ohYayGif.style.display = 'block';
+        } else {
+          ohYayGif.style.display = 'none';
+        }
+      }
+
+      const btnNo = document.querySelector(".btn-no");
+
+      btnNo.addEventListener("mouseover", () => {
+        const containerRect = btnNo.parentElement.getBoundingClientRect();
+        const btnRect = btnNo.getBoundingClientRect();
+
+        let newTop = Math.random() * (containerRect.height - btnRect.height);
+        let newLeft = Math.random() * (containerRect.width - btnRect.width);
+
+        btnNo.style.position = "absolute";
+        btnNo.style.top = `${newTop}px`;
+        btnNo.style.left = `${newLeft}px`;
+      });
+    </script>
+  </body>
+</html>
